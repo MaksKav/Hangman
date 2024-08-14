@@ -12,10 +12,6 @@ public class Player {
 
     public Player() {}
 
-    @Override
-    public String toString() {
-        return playerName + ", have " + scoreOfWin + " wins" + " and " + scoreOfLose + " losses";
-    }
 
     public void incrementScoreOfWin() {
         scoreOfWin++;
