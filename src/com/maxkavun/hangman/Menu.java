@@ -1,5 +1,6 @@
 package com.maxkavun.hangman;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 /*
     This class responsible for displaying and handling the main menu.
@@ -30,13 +31,19 @@ public class Menu {
     public int secondDisplayMenuChoice (){
         boolean bool = true ;
         int choice = 0 ;
+
         while(bool) {
-            choice = scanner.nextInt();
-            scanner.nextLine();
-            if(choice == 1 || choice == 2) {
-                bool = false ;
-            }else {
+            try {
+                choice = scanner.nextInt();
+                scanner.nextLine();
+                if(choice == 1 || choice == 2) {
+                    bool = false ;
+                }else {
+                    System.out.println("You entered an incorrect command. Please choose 1 or 2");
+                }
+            } catch (InputMismatchException e) {
                 System.out.println("You entered an incorrect command. Please choose 1 or 2");
+                scanner.nextLine();
             }
         }
         return choice ;
