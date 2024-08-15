@@ -11,6 +11,7 @@ The application randomly selects a word from a list.
 The word is replaced by underscores _, representing the number of letters in the word.
 The player enters a letter:
 If the letter is in the word, it is revealed in the correct positions.
+It doesn't matter which case the letter is written in.
 If the letter is not in the word, the error counter increases, and part of the hangman is drawn.
 The player is allowed a certain number of mistakes (usually 6).
 
