@@ -1,9 +1,10 @@
-package com.maxkavun.hangman;
+package main.java.com.maxkavun.hangman.service;
+
+import main.java.com.maxkavun.hangman.entity.Player;
+import main.java.com.maxkavun.hangman.utils.StringUtils;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
-import static com.maxkavun.hangman.Strings.getStrings;
 
 /*
     This class responsible for displaying and handling the main menu.
@@ -20,16 +21,16 @@ public class Menu {
 
 
     public void firstDisplayMenu() {
-        System.out.println(getStrings("welcome"));
-        System.out.println(getStrings("enter_name"));
+        System.out.println(StringUtils.getStrings("welcome"));
+        System.out.println(StringUtils.getStrings("enter_name"));
         player.setPlayerName(scanner.nextLine());
     }
 
 
     public void secondDisplayMenu() {
-        System.out.println(getStrings("choose_option"));
-        System.out.println(getStrings("new_game"));
-        System.out.println(getStrings("quit"));
+        System.out.println(StringUtils.getStrings("choose_option"));
+        System.out.println(StringUtils.getStrings("new_game"));
+        System.out.println(StringUtils.getStrings("quit"));
     }
 
     public int secondDisplayMenuChoice() {
@@ -43,10 +44,10 @@ public class Menu {
                 if (choice == 1 || choice == 2) {
                     bool = false;
                 } else {
-                    System.out.println(getStrings("incorrect_command"));
+                    System.out.println(StringUtils.getStrings("incorrect_command"));
                 }
             } catch (InputMismatchException e) {
-                System.out.println(getStrings("incorrect_command"));
+                System.out.println(StringUtils.getStrings("incorrect_command"));
                 scanner.nextLine();
             }
         }

@@ -1,4 +1,4 @@
-package com.maxkavun.hangman;
+package main.java.com.maxkavun.hangman.service;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static com.maxkavun.hangman.Main.language;
+import static main.java.com.maxkavun.hangman.Main.language;
 
 /*
     The WordGenerator class is responsible for selecting a random randomWord
@@ -28,9 +28,9 @@ public class WordGenerator {
         List<String> words = new ArrayList<>();
         try {
             if (language.equals("eng")) {
-                 path = Path.of("src", "words_ENG.txt");
+                 path = Path.of("src", "com/maxkavun/hangman/resources/words_ENG.txt");
             } else {
-                 path = Path.of("src", "words_UKR.txt");
+                 path = Path.of("src", "com/maxkavun/hangman/resources/words_UKR.txt");
             }
 
             words = Files.readAllLines(path);
@@ -38,6 +38,7 @@ public class WordGenerator {
             int i = rand.nextInt(words.size());
             randomWord = words.get(i);
         } catch (IOException e) {
+            System.out.println("Problem in the class --WordGenerator--, problem with finding a random randomWord.");
             throw new RuntimeException(e);
         }
         if (randomWord == null || randomWord.isEmpty()) {

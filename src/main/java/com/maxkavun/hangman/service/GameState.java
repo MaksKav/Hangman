@@ -1,4 +1,4 @@
-package com.maxkavun.hangman;
+package main.java.com.maxkavun.hangman.service;
 
 import java.util.HashSet;
 import java.util.Set;

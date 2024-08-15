@@ -1,5 +1,7 @@
-package com.maxkavun.hangman;
+package main.java.com.maxkavun.hangman.utils;
 
+
+import main.java.com.maxkavun.hangman.service.GameState;
 
 /*
     Responsible for displaying the state of the hangman and the progress of the game.

@@ -1,4 +1,4 @@
-package com.maxkavun.hangman;
+package main.java.com.maxkavun.hangman.entity;
 /*
     The Player class represents the player in the game.
     It is responsible for storing the player's information and handling any player-specific actions or data.

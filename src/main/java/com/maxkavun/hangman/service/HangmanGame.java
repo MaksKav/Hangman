@@ -1,11 +1,13 @@
-package com.maxkavun.hangman;
+package main.java.com.maxkavun.hangman.service;
 
+
+import main.java.com.maxkavun.hangman.entity.Player;
+import main.java.com.maxkavun.hangman.utils.StringUtils;
+import main.java.com.maxkavun.hangman.utils.HangmanDisplay;
 
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
-
-import static com.maxkavun.hangman.Strings.getStrings;
 
 public class HangmanGame {
     public static Set <Character> characterSet = new HashSet<Character>(); ;
@@ -50,17 +52,17 @@ public class HangmanGame {
         gameState.initGameState(wordGenerator.getRandomWord());
 
         while(!gameState.isGameOver()){
-            System.out.println(getStrings("enter_letter"));
+            System.out.println(StringUtils.getStrings("enter_letter"));
 
             String input = scanner.nextLine().toLowerCase();
 
             if (input.length() != 1) {
-                System.out.println(getStrings("one_letter"));
+                System.out.println(StringUtils.getStrings("one_letter"));
                 continue;
             }
 
             if (characterSet.contains(input.charAt(0))) {
-                System.out.println(getStrings("already_entered"));
+                System.out.println(StringUtils.getStrings("already_entered"));
                 continue;
             }
 
@@ -71,27 +73,27 @@ public class HangmanGame {
             gameState.updateCurrentState(letter);
             hangmanDisplay.drawHangman();
             System.out.println(gameState.getCurrentStateOfTheWord());
-            System.out.println(getStrings("mistakes") + gameState.getErrors()+"/6");
+            System.out.println(StringUtils.getStrings("mistakes") + gameState.getErrors()+"/6");
 
             if (gameState.isLose()) {
                 player.incrementScoreOfLose();
                 characterSet.clear();
-                System.out.println(getStrings("lose") + wordGenerator.getRandomWord() + "\n");
+                System.out.println(StringUtils.getStrings("lose") + wordGenerator.getRandomWord() + "\n");
             }
 
             if (gameState.isVictory()){
                 player.incrementScoreOfWin();
                 characterSet.clear();
-                System.out.println(getStrings("win") + "\n");
+                System.out.println(StringUtils.getStrings("win") + "\n");
             }
         }
     }
 
     public void endGame(){
-        System.out.println("\n"+ getStrings("thank_you")+ player.getPlayerName() + getStrings("see_you"));
-        System.out.println(getStrings("final_score"));
-        System.out.println(getStrings("win_count") + player.getScoreOfWin());
-        System.out.println(getStrings("lose_count") + player.getScoreOfLose());
+        System.out.println("\n"+ StringUtils.getStrings("thank_you")+ player.getPlayerName() + StringUtils.getStrings("see_you"));
+        System.out.println(StringUtils.getStrings("final_score"));
+        System.out.println(StringUtils.getStrings("win_count") + player.getScoreOfWin());
+        System.out.println(StringUtils.getStrings("lose_count") + player.getScoreOfLose());
         System.exit(0);
     }
 
