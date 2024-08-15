@@ -36,6 +36,10 @@ public class GameState {
         }
     }
 
+    /*
+        Replaces the selected random word with special characters.
+        It also breaks the word into letters.
+    */
     public void initGameState(String wordToGuess){
         this.wordToGuess = wordToGuess;
         this.currentStateOfTheWord = new StringBuilder("_".repeat(wordToGuess.length()));
