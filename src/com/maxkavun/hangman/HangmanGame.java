@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
+import static com.maxkavun.hangman.Strings.getStrings;
+
 public class HangmanGame {
     public static Set <Character> characterSet = new HashSet<Character>(); ;
 
@@ -26,140 +28,73 @@ public class HangmanGame {
         this.scanner = scanner;
     }
 
-    public void startGame_Eng() {
+    public void startGame() {
 
-        menu.firstDisplayMenu_Eng();
+        menu.firstDisplayMenu();
         while (true){
-            menu.secondDisplayMenu_Eng();
-            int choice = menu.secondDisplayMenuChoice_Eng();
+            menu.secondDisplayMenu();
+            int choice = menu.secondDisplayMenuChoice();
             if (choice == 2) {
-                endGame_Eng();
+                endGame();
             }else {
                 if (gameState.getErrors()>0){
                     gameState.setErrors(0);
                 }
-                continueGame_Eng();
+                continueGame();
             }
         }
     }
 
-    public void continueGame_Eng() {
-        wordGenerator.loadWord_Eng();
+    public void continueGame() {
+        wordGenerator.loadWord();
         gameState.initGameState(wordGenerator.getRandomWord());
 
         while(!gameState.isGameOver()){
-            System.out.println("Enter a letter");
+            System.out.println(getStrings("enter_letter"));
 
-            String input = scanner.nextLine();
+            String input = scanner.nextLine().toLowerCase();
 
             if (input.length() != 1) {
-                System.out.println("Please enter only one letter.");
+                System.out.println(getStrings("one_letter"));
                 continue;
             }
 
             if (characterSet.contains(input.charAt(0))) {
-                System.out.println("You've already entered this letter, please try again");
+                System.out.println(getStrings("already_entered"));
                 continue;
             }
 
             char letter = input.charAt(0);
+
             characterSet.add(letter);
 
             gameState.updateCurrentState(letter);
             hangmanDisplay.drawHangman();
             System.out.println(gameState.getCurrentStateOfTheWord());
-            System.out.println("Mistakes: " + gameState.getErrors()+"/6");
+            System.out.println(getStrings("mistakes") + gameState.getErrors()+"/6");
 
             if (gameState.isLose()) {
                 player.incrementScoreOfLose();
                 characterSet.clear();
-                System.out.println("Oh, you lost. The correct word was --> " + wordGenerator.getRandomWord() + "\n");
+                System.out.println(getStrings("lose") + wordGenerator.getRandomWord() + "\n");
             }
 
             if (gameState.isVictory()){
                 player.incrementScoreOfWin();
                 characterSet.clear();
-                System.out.println("Congratulation ! You won!" + "\n");
+                System.out.println(getStrings("win") + "\n");
             }
-
         }
-
     }
 
-    public void endGame_Eng(){
-        System.out.println("\nThank you for playing '"+ player.getPlayerName() +"' see you next time!");
-        System.out.println("Your final score is:");
-        System.out.println("Win :" + player.getScoreOfWin());
-        System.out.println("Lose :" + player.getScoreOfLose());
+    public void endGame(){
+        System.out.println("\n"+ getStrings("thank_you")+ player.getPlayerName() + getStrings("see_you"));
+        System.out.println(getStrings("final_score"));
+        System.out.println(getStrings("win_count") + player.getScoreOfWin());
+        System.out.println(getStrings("lose_count") + player.getScoreOfLose());
         System.exit(0);
     }
 
 
-    // Methods for ukrainian languages
 
-    public void startGame_Ukr() {
-
-        menu.firstDisplayMenu_Ukr();
-        while (true) {
-            menu.secondDisplayMenu_Ukr();
-            int choice = menu.secondDisplayMenuChoice_Ukr();
-            if (choice == 2) {
-                endGame_Ukr();
-            } else {
-                if (gameState.getErrors() > 0) {
-                    gameState.setErrors(0);
-                }
-                continueGame_Ukr();
-            }
-        }
-    }
-
-    public void continueGame_Ukr() {
-        wordGenerator.loadWord_Ukr();
-        gameState.initGameState(wordGenerator.getRandomWord());
-
-        while (!gameState.isGameOver()) {
-            System.out.println("Введіть літеру");
-
-            String input = scanner.nextLine();
-
-            if (input.length() != 1) {
-                System.out.println("Будь ласка, введіть лише одну літеру.");
-                continue;
-            }
-
-            if (characterSet.contains(input.charAt(0))) {
-                System.out.println("Ви вже вводили цю літеру , спробуйте знову ");
-                continue;
-            }
-
-            char letter = input.charAt(0);
-            characterSet.add(letter);
-
-            gameState.updateCurrentState(letter);
-            hangmanDisplay.drawHangman();
-            System.out.println(gameState.getCurrentStateOfTheWord());
-            System.out.println("Помилки: " + gameState.getErrors() + "/6");
-
-            if (gameState.isLose()) {
-                player.incrementScoreOfLose();
-                characterSet.clear();
-                System.out.println("На жаль, ви програли. Правильне слово було --> " + wordGenerator.getRandomWord() + "\n");
-            }
-
-            if (gameState.isVictory()) {
-                player.incrementScoreOfWin();
-                characterSet.clear();
-                System.out.println("Вітаємо! Ви виграли!" + "\n");
-            }
-        }
-    }
-
-    public void endGame_Ukr() {
-        System.out.println("\nДякуємо за гру '" + player.getPlayerName() + "' до наступного разу!");
-        System.out.println("Ваш остаточний рахунок:");
-        System.out.println("Перемог: " + player.getScoreOfWin());
-        System.out.println("Поразок: " + player.getScoreOfLose());
-        System.exit(0);
-    }
 }

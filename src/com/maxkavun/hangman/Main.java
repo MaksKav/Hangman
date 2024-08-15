@@ -2,6 +2,9 @@ package com.maxkavun.hangman;
 
 import java.util.Scanner;
 
+import static com.maxkavun.hangman.Strings.getStrings;
+import static com.maxkavun.hangman.Strings.loadLocalization;
+
 public class Main {
 
     public static String language = "notNULL";
@@ -13,16 +16,15 @@ public class Main {
         System.out.println("Please write ENG | Будь ласка напишіть УКР");
         while (bool) {
             language = scanner.nextLine();
-            if (language.equals("eng") || language.equals("ENG") || language.equals("укр") || language.equals("УКР")) {
+            language = language.toLowerCase();
+            if (language.equals("eng") || language.equals("укр")) {
                 bool = false;
-                language = language.toLowerCase();
+                loadLocalization(language);
             } else {
                 System.out.println("You entered an incorrect command , try again. | Введена неправильна команда , спробуйте ще раз");
-                scanner.nextLine();
             }
         }
     }
-
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -36,10 +38,6 @@ public class Main {
 
         startingDisplayMenu();
 
-        if (language.equals("eng")) {
-            hangmanGame.startGame_Eng();
-        } else if (language.equals("укр")) {
-            hangmanGame.startGame_Ukr();
-        }
+        hangmanGame.startGame();
     }
 }

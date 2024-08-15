@@ -71,14 +71,6 @@ public class HangmanDisplay {
 
     public void drawHangman(){
         int counter = gameState.getErrors();
-        switch (counter){
-            case 0 -> System.out.println(hangmanStages[0]);
-            case 1 -> System.out.println(hangmanStages[1]);
-            case 2 -> System.out.println(hangmanStages[2]);
-            case 3 -> System.out.println(hangmanStages[3]);
-            case 4 -> System.out.println(hangmanStages[4]);
-            case 5 -> System.out.println(hangmanStages[5]);
-            case 6 -> System.out.println(hangmanStages[6]);
-        }
+        System.out.println(hangmanStages[counter]);
     }
 }

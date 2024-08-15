@@ -9,8 +9,6 @@ import java.util.Random;
 
 import static com.maxkavun.hangman.Main.language;
 
-
-
 /*
     The WordGenerator class is responsible for selecting a random randomWord
     from a predefined list of words for the player to guess.
@@ -22,17 +20,19 @@ public class WordGenerator {
     private String randomWord;
 
     public WordGenerator() {
-        if (language.equals("eng")) {
-            loadWord_Eng();
-        } else {
-            loadWord_Ukr();
-        }
+        loadWord();
     }
 
-    public void loadWord_Eng() {
+    public void loadWord() {
+        Path path;
         List<String> words = new ArrayList<>();
         try {
-            Path path = Path.of("src", "words_ENG.txt");
+            if (language.equals("eng")) {
+                 path = Path.of("src", "words_ENG.txt");
+            } else {
+                 path = Path.of("src", "words_UKR.txt");
+            }
+
             words = Files.readAllLines(path);
             Random rand = new Random();
             int i = rand.nextInt(words.size());
@@ -44,27 +44,6 @@ public class WordGenerator {
             throw new IllegalStateException("Problem in the class --WordGenerator--, problem with finding a random randomWord.");
         }
     }
-
-
-    // Methods for ukrainian languages
-
-
-    public void loadWord_Ukr() {
-        List<String> words = new ArrayList<>();
-        try {
-            Path path = Path.of("src", "words_UKR.txt");
-            words = Files.readAllLines(path);
-            Random rand = new Random();
-            int i = rand.nextInt(words.size());
-            randomWord = words.get(i);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        if (randomWord == null || randomWord.isEmpty()) {
-            throw new IllegalStateException("Проблема в класі --WordGenerator--, проблема з знаходженням випадкового слова.");
-        }
-    }
-
 
     public String getRandomWord() {
         return randomWord;
